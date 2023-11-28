@@ -1,38 +1,43 @@
+// Function to update font size and letter spacing
+function updateFontSizeAndSpacing() {
+  const fontSize = $("#font-size").val() / 100 + "in";
+  const letterSpacing = ($("#font-size").val() / 400) * 3 + "in";
+
+  $(".letter").css("height", fontSize);
+  $(".letter-space").css("width", letterSpacing);
+}
+
+// Event handler for font size input
 $("#font-size").on("input", function () {
-  fs = $(this).val() / 100 + "in";
-  ws = ($(this).val() / 400) * 3 + "in";
-  $(".letter").css("height", fs);
-  $(".letter-space").css("width", ws);
+  updateFontSizeAndSpacing();
 });
 
+// Event handler for line height input
 $("#line-height").on("input", function () {
-  lh = $(this).val() / 50 + "in";
-  $("#container").css("line-height", lh);
+  const lineHeight = $(this).val() / 50 + "in";
+  $("#container").css("line-height", lineHeight);
 });
 
+// Set initial scale for the container
+const initialScale = $(window).height() / ($("#container").height() - 40);
+$("#container").css({ transform: "scale(" + initialScale + ")" });
+
+// Trigger keypress on text input focus
 $("#text").focus().trigger("keypress");
 
-let s = $(window).height() / ($("#container").height() - 40);
+// Event handler for text input keyup
+$("#text").keyup(function () {
+  const textLines = $("#text").val();
 
-$("#container").css({
-  transform: "scale(" + s + ")",
-});
-
-$("#text").keyup(function (e) {
   $("#container").empty();
 
-  let lines = $("#text").val();
-
-  for (i = 0; i < lines.length; i++) {
-    if (lines[i] == " ") {
-      $("<div></div>")
-        .addClass("letter letter-space")
-
-        .appendTo("#container");
-    } else if (lines[i] == "\n") {
+  for (let i = 0; i < textLines.length; i++) {
+    if (textLines[i] == " ") {
+      $("<div></div>").addClass("letter letter-space").appendTo("#container");
+    } else if (textLines[i] == "\n") {
       $("<br />").appendTo("#container");
     } else {
-      let letter = lines[i].toUpperCase();
+      const letter = textLines[i].toUpperCase();
       $("<img>")
         .attr("src", "alphabet/" + letter + ".gif")
         .addClass("letter letter-" + letter)
@@ -40,18 +45,15 @@ $("#text").keyup(function (e) {
     }
   }
 
-  if ($("#font-size").val() != 50 && $("#leading").val() != 50) {
-    fs = $("#font-size").val() / 100 + "in";
-    ws = ($("#font-size").val() / 400) * 3 + "in";
+  if ($("#font-size").val() !== "50" && $("#leading").val() !== "50") {
+    updateFontSizeAndSpacing();
 
-    $(".letter").css("height", fs);
-    $(".letter-space").css("width", ws);
-
-    lh = $("#leading").val() / 50 + "in";
-    $("#container").css("line-height", lh);
+    const lineHeight = $("#leading").val() / 50 + "in";
+    $("#container").css("line-height", lineHeight);
   }
 });
 
+// Event handler for nudge button click
 $("#nudge").click(function () {
   $("#menu").fadeOut(200);
   $(".letter").css("cursor", "move").draggable();
