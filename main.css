@@ -54,14 +54,14 @@ body {
 }
 
 #text {
-	width: auto;
-	padding: 2vw;
+	width: 60vw;
+	padding: 1vw;
     height: 12vh;
     font-size: 20px;
     border: 1px solid black;
     outline: 0;
     margin-right: 1em;
-    /*opacity: 0;*/
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #nudge {
