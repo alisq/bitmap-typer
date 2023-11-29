@@ -1,6 +1,6 @@
 // Function to update font size and letter spacing
 function updateFontSizeAndSpacing() {
-  const fontSize = $("#font-size").val() / 100 + "in";
+  const fontSize = $("#font-size").val() / 20 + "in";
   const letterSpacing = ($("#font-size").val() / 400) * 3 + "in";
 
   $(".letter").css("height", fontSize);
@@ -39,7 +39,7 @@ $("#text").keyup(function () {
     } else {
       const letter = textLines[i].toUpperCase();
       $("<img>")
-        .attr("src", "alphabet/" + letter + ".gif")
+        .attr("src", "a2/" + letter + ".png")
         .addClass("letter letter-" + letter)
         .appendTo("#container");
     }
