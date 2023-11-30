@@ -82,8 +82,8 @@ img{
 
 @media print {
     html, body {
-        width: 17in;
-        height: 11in;
+        width: 11in;
+        height: 8.5in;
         margin: 0;
         padding: 0;
     }
